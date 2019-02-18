@@ -1,24 +1,6 @@
-# README
+[![Build Status](https://travis-ci.org/oahray/notesy.svg?branch=develop)](https://travis-ci.org/oahray/notesy)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# NOTESY
 
-Things you may want to cover:
+Lightweight Rails app that lets you manage notes securely.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

@@ -1,11 +1,13 @@
 require "rails_helper"
 
 RSpec.describe "Notes API", type: :request do
-  let!(:notes) { create_list(:note, 10) }
+  let(:user) { create(:user) }
+  let!(:notes) { create_list(:note, 10, user: user) }
   let(:note_id) { notes.first.id }
+  let(:headers) { { "Authorization" => token_generator(user.id) } }
 
   describe "GET /notes" do
-    before { get "/notes" }
+    before { get "/notes", params: {}, headers: headers }
 
     it "returns notes" do
       expect(json).not_to be nil
@@ -18,7 +20,7 @@ RSpec.describe "Notes API", type: :request do
   end
 
   describe "GET /notes/:id" do
-    before { get "/notes/#{note_id}" }
+    before { get "/notes/#{note_id}", params: {}, headers: headers }
 
     context "when the record does not exist" do
       let(:note_id) { 100 }
@@ -48,7 +50,7 @@ RSpec.describe "Notes API", type: :request do
     let(:valid_attributes) { { title: "Hello geeky world!", body: "This is totally my first attempt!" } }
 
     context "when the request is valid" do
-      before { post "/notes", params: valid_attributes }
+      before { post "/notes", params: valid_attributes, headers: headers }
 
       it "creates a note" do
         expect(json["title"]).to eq(valid_attributes[:title])
@@ -61,7 +63,7 @@ RSpec.describe "Notes API", type: :request do
     end
 
     context "when the request is invalid" do
-      before { post "/notes", params: { title: "Foobar" } }
+      before { post "/notes", params: { title: "Foobar" }, headers: headers }
 
       it "returns status code 422" do
         expect(response).to have_http_status(422)
@@ -78,7 +80,7 @@ RSpec.describe "Notes API", type: :request do
     let(:valid_attributes) { { title: "Shopping today" } }
 
     context "when the record exists" do
-      before { put "/notes/#{note_id}", params: valid_attributes }
+      before { put "/notes/#{note_id}", params: valid_attributes, headers: headers }
 
       it "updates the record" do
         expect(json["title"]).to eq(valid_attributes[:title])
@@ -91,7 +93,7 @@ RSpec.describe "Notes API", type: :request do
   end
 
   describe "DELETE /notes/:id" do
-    before { delete "/notes/#{note_id}" }
+    before { delete "/notes/#{note_id}", params: {}, headers: headers }
 
     it "returns status code 204" do
       expect(response).to have_http_status(204)

@@ -2,16 +2,13 @@ AllCops:
   DisplayCopNames: yes
   TargetRubyVersion: 2.4
   Exclude:
-    - "app/backends/cash_management/*/**.rb"
-    - "app/backends/offline/*/**.rb"
-    - "app/backends/offsite/*/**.rb"
     - "bin/*"
     - "db/schema.rb"
-    - "lib/omise/gateway.rb"
-    - "gen/**/*.rb"
-    - "test/backends/cash_management/*/*.rb"
-    - "test/backends/offline/*/*.rb"
-    - "test/backends/offsite/*/*.rb"
+    - "app/mailers/**/*"
+    - "config/**/*"
+    - "spec/rails_helper.rb"
+    - "spec/spec_helper.rb"
+    - Gemfile*
     - "\\.*"
 
 # disables

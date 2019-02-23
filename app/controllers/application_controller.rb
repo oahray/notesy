@@ -7,7 +7,8 @@ class ApplicationController < ActionController::API
 
   def landing
     json_response({
-      message: "Welcome to Notes API",
+      message: "Welcome to Notes API. To learn how to use this API, see documentation on the github page with the link below",
+      github: "https://github.com/oahray/notesy",
     })
   end
 

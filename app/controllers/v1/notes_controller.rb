@@ -1,8 +1,11 @@
-class NotesController < ApplicationController
+class V1::NotesController < ApplicationController
   before_action :set_note, only: %i[show update destroy]
 
   def index
-    @notes = current_user.notes
+    page = params[:page] ||= 1
+    limit = params[:limit] ||= 15
+    @notes = current_user.notes.paginate(page: page, per_page: limit)
+
     json_response(@notes)
   end
 
